@@ -17,7 +17,7 @@ fn main() {
     let args = Args::parse();
 
     let mut quotes: Vec<String> = vec![
-        // Default quotes
+        // default quotes if you want to add more of them for the silly :3
         "People can be more understanding than you think they'll be. - Leah Anderson".to_string(),
         "It is during our darkest moments that we must focus to see the light. - Aristotle Onassis".to_string(),
         "No act of kindness, no matter how small, is ever wasted. - Aesop".to_string(),
@@ -40,9 +40,9 @@ fn main() {
     ];
 
     if let Some(quotefile) = args.file {
-        // Attempt to read the file
+        // read the goddamn fucking file
         let contents = fs::read_to_string(quotefile).expect("Could not read file");
-        // Checks if the fortune flag is enabled, if so, run in fortune mode, otherwise, run in newline parsing mode
+        // if fortune flag is enabled, parse in fortune mode. if not, fuck you, you're getting newline parsing
         if args.fortune {
             quotes = contents.split('%').map(|quote| quote.trim().to_string()).collect();
         }
@@ -50,6 +50,6 @@ fn main() {
             quotes = contents.lines().map(|line| line.to_string()).collect();
         }
     }
-    // print a quote from the vector out, if there are no quotes, print an error message
+    // print a quote from the vector out, if there are no quotes, print an error message instead because fuck you
     println!("{}", quotes.choose(&mut rand::thread_rng()).unwrap_or(&"No quotes found! Is the custom file you're using empty?".to_string()));
 }
