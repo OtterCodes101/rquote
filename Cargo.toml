@@ -2,6 +2,9 @@
 name = "rquote"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+repository = "https://github.com/OtterCodes101/rquote"
+description = "A Rust program that prints random quotes"
 
 [dependencies]
 clap = { version = "4.5.20", features = ["derive"] }
