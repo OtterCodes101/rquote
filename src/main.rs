@@ -1,13 +1,15 @@
 use std::path::PathBuf;
 use std::fs;
 use rand::seq::SliceRandom;
-use clap::Parser;
+use clap::{ArgAction, Parser};
 
 #[derive(Parser, Debug)]
 #[command(author="Leah Anderson", version, about="Rust program that randomly prints quotes")]
 struct Args {
     #[arg(short, long, help = "Optionally specify a file to read quotes from instead of using the built-in quotes. Every line in the file is considered a quote.")]
     file: Option<PathBuf>,
+    #[arg(short = 'F', long, action=ArgAction::SetFalse, help = "Choose whether to use fortune mode or not. Fortune mode parses the file as a custom fortune file.")]
+    fortune: bool
 }
 
 
@@ -36,7 +38,12 @@ fn main() {
 
     if let Some(quotefile) = args.file {
         let contents = fs::read_to_string(quotefile).expect("Could not read file");
-        quotes = contents.lines().map(|line| line.to_string()).collect();
+        if args.fortune {
+            quotes = contents.split('%').map(|quote| quote.trim().to_string()).collect();
+        }
+        else {
+            quotes = contents.lines().map(|line| line.to_string()).collect();
+        }
     }
     println!("{}", quotes.choose(&mut rand::thread_rng()).unwrap_or(&"No quotes found!".to_string()));
 }
