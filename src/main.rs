@@ -36,6 +36,7 @@ fn main() {
         "Code is like humor. When you have to explain it, it’s bad. – Cory House".to_string(),
         "In open source, we feel strongly that to really do something well, you have to get a lot of people involved. - Linus Torvalds".to_string(),
         "No matter how dark things seem, you have to keep going. There's a light at the ended of that tunnel, no matter what. - Leah Anderson".to_string(),
+        ":3 - Echo".to_string(),
     ];
 
     if let Some(quotefile) = args.file {
